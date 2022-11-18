@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 const currencyURL = "https://api.apilayer.com/currency_data/"
 var myHeaders = new Headers();
-myHeaders.append("apikey", "g7UeYngpQ1AfUc9A5CYg5pphtDf8eJn3");
+myHeaders.append("apikey", "tGn2PoCsWghQWG0cgnymhcopCFkdIDj2");
 
 var requestOptions = {
   method: 'GET',
