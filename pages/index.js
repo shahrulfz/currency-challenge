@@ -20,13 +20,20 @@ export default function Home() {
   const today = new Date();
   const [selectedDate, setSelectedDate] = useState(today);
   const [displayCurrency, setDisplayCurrency] = useState();
-
+  const [msg, setMsg] = useState("Loading")
   function formatDate(date) {
     return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
   }
 
   const updateCurrencyData = (currencyData) => {
     currencyData = JSON.parse(currencyData);
+
+    if (!currencyData.success) {
+      setDisplayCurrency()
+      setMsg(currencyData.message);
+      return;
+    }
+
     const storeData = [];
     for (const currency of chosenDisplayCurrency) {
       storeData.push(
@@ -50,6 +57,8 @@ export default function Home() {
   }
 
   const getCurrencyDataByDate = (date) => {
+    setDisplayCurrency()
+    setMsg("Fetching Data");
     setSelectedDate(new Date(date))
     fetch(currencyURL + `live?source=${chosenSourceCurrency}&date=${date}`, requestOptions)
       .then(response => response.text())
@@ -90,7 +99,7 @@ export default function Home() {
                 </div>
               })
               :
-              "Loading"
+              msg
           }
         </div>
       </div>
